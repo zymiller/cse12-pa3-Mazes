@@ -33,7 +33,7 @@ class QueueWorklist implements SearchWorklist {
 	}
 
 	public boolean isEmpty() {
-		return squareList.size() == 0;
+		return squareList.isEmpty();
 	}
 }
 
