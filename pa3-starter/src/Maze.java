@@ -123,12 +123,13 @@ class Maze {
 		ArrayList<Square> finishPath = new ArrayList<Square>();
 		Square pathTarget = this.finish;
 		while (pathTarget.getPrevious() != null) {
-			finishPath.add(pathTarget);
+			finishPath.add(0, pathTarget);
 		}
 		if (finishPath.get(0).equals(this.start)) {
 			return finishPath;
 		} else {
-			return finishPath.removeAll(finishPath);
+			finishPath.removeAll(finishPath);
+			return finishPath;
 		}
 	}
 }
