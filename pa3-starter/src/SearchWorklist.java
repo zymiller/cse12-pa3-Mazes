@@ -2,7 +2,6 @@
  * Class to implement SearchWorklist as a Stack and a Queue.
  * You can use any built-in Java collections for this class.
  */
-import java.io.*;
 import java.util.*;
 
 class StackWorklist implements SearchWorklist {

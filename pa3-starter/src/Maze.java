@@ -124,7 +124,9 @@ class Maze {
 		Square pathTarget = this.finish;
 		while (pathTarget.getPrevious() != null) {
 			finishPath.add(0, pathTarget);
+			pathTarget = pathTarget.getPrevious();
 		}
+		finishPath.add(0, pathTarget);
 		if (finishPath.get(0).equals(this.start)) {
 			return finishPath;
 		} else {
