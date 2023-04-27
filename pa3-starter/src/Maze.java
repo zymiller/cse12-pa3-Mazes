@@ -121,17 +121,21 @@ class Maze {
 	 */
 	public ArrayList<Square> storePath() {
 		ArrayList<Square> finishPath = new ArrayList<Square>();
+		// Sets first item as the finish
 		Square pathTarget = this.finish;
 		while (pathTarget.getPrevious() != null) {
+			// Keeps adding items in front of finish to build path to end
 			finishPath.add(0, pathTarget);
 			pathTarget = pathTarget.getPrevious();
 		}
+		
+		// Last item will be maze.start and this will add it to the very front of list
 		finishPath.add(0, pathTarget);
+		// Check if start is in the path (meaning it's a complete path)
 		if (finishPath.get(0).equals(this.start)) {
 			return finishPath;
 		} else {
-			finishPath.removeAll(finishPath);
-			return finishPath;
+			return null;
 		}
 	}
 }

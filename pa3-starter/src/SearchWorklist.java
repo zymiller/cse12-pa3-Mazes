@@ -5,6 +5,7 @@
 import java.util.*;
 
 class StackWorklist implements SearchWorklist {
+	// Stack class for stack worklist 
 	Stack<Square> squareStack = new Stack<Square>();
 	
 	public void add(Square c) {
@@ -21,12 +22,14 @@ class StackWorklist implements SearchWorklist {
 }
 
 class QueueWorklist implements SearchWorklist {
+	// Linked list for queue
 	LinkedList<Square> squareList = new LinkedList<Square>();
 
 	public void add (Square c) {
 		squareList.add(c);
 	}
 
+	//Since add appends items to list, removeFirst gets rid of items on opposite end like a queue
 	public Square remove() {
 		return squareList.removeFirst();
 	}

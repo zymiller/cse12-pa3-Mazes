@@ -16,7 +16,6 @@ public class TestSolvers {
 		if(expected == null) { assertNull(s); }
 		else {
 			ArrayList<Square> sp = startMaze.storePath();
-			System.out.println(sp);
 			assertEquals(s, startMaze.finish);
 			String actualStr = formatMaze(startMaze.showSolution(sp));
 			String expectedStr = formatMaze(expected);
@@ -46,34 +45,58 @@ public class TestSolvers {
             "____"
         });
 	
-	Maze m3 = new Maze(new String[] {
-            "_#F",
-            "___",
-            "S__"
+	// Clones the m1 maze into m4
+	Maze m4 = new Maze(new String[] {
+            "#___",
+            "__F_",
+            "S##_",
+            "____"
         });
 	
 	Maze m2 = new Maze(new String[] {"S"});
-	String[] m2Solution = {"S"};
 	
 	String[] queueSol = {"#___", "**F_", "S##_", "____"};
 	String[] stackSol = {"#___", "__F*", "S##*", "****"};
+	
+	String[] m2Sol = {};
+
+	/**
+	 * Tests maze given in the writeup
+	 */
 	@Test
-	public void dummyTest() {
+	public void testGivenMaze() {
 		QueueWorklist q = new QueueWorklist();
 		StackWorklist s = new StackWorklist();
 		checkMaze(q, m1, queueSol);
-		
+		checkMaze(s, m4, stackSol);
 	}
+	
+	/**
+	 * Tests if a maze with no solution will return a null value
+	 */
 	@Test
-	public void test2() {
+	public void testBadMaze() {
 		QueueWorklist q = new QueueWorklist();
 		StackWorklist s = new StackWorklist();
 		checkMaze(q, m2, null);
-		
 	}
+	
+	//Helper method to extract solution for mazes
+	public String solveMaze(SearchWorklist wl, Maze startMaze) {
+		Square s = MazeSolver.solve(startMaze, wl);	
+		ArrayList<Square> sp = startMaze.storePath();
+		return formatMaze(startMaze.showSolution(sp));
+	}
+	
+	/**
+	 * Tests if maze solvers have same output every time
+	 */
 	@Test
-	public void test3() {
-		
+	public void testSameSolution() {	
+		StackWorklist s = new StackWorklist();
+		String solvedStack1 = solveMaze(s, m1);
+		String solvedStack2 = solveMaze(s, m1);
+		assertEquals(solvedStack1, solvedStack2);
 	}
 }
 

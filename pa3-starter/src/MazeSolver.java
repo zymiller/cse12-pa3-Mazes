@@ -3,6 +3,9 @@
 public abstract class MazeSolver {
 	
 	public static Square solve(Maze maze, SearchWorklist wl) {
+		while(!wl.isEmpty()) {
+			wl.remove();
+		}
 		String[] cardinalD = {"n", "s", "e", "w"};
 		wl.add(maze.start);
 		maze.start.visit();
@@ -11,10 +14,14 @@ public abstract class MazeSolver {
 			if (current.equals(maze.finish)) {
 				return current;
 			} else {
+				// Takes every direction in NSEW
 				for(String direction: cardinalD) {
+					// Stores position of current square
 					int posX = current.getCol();
 					int posY = current.getRow();
+					// Target square is the neighboring square
 					Square target = null;
+					// If checks if neighbor in in bounds
 					switch(direction) {
 						case "n":
 							if (posY - 1 >= 0) {
@@ -40,6 +47,7 @@ public abstract class MazeSolver {
 						default:
 							break;
 						}
+					// Checks if it is an open unvisited space
 					if (!(target == null || target.getIsWall() || target.isVisited())) {
 						target.visit();
 						target.setPrevious(current);
